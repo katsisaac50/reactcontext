@@ -1,20 +1,63 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
 
-const DataContext=React.createContext('darkness')
+const PhotoContext = React.createContext({gir:"names"})
+
+let Url="https://jsonplaceholder.typicode.com/photos";
+
+const Photo = ({ photo }) => {
+  console.log({photo})
+  return <img src={photo.url} />
+}
+
+const PhotoList = () => {
+  return (
+    <PhotoContext.Consumer>
+      {
+        photos => {
+          if (photos)
+          {
+            return photos.map(
+              (item) => <Photo photo={item} />
+            )
+          }
+        } 
+
+      }
+    </PhotoContext.Consumer>
+  )
+}
+
 class App extends Component {
+
+  state = {}
+
+
+  photoData = () => {
+    axios.get(Url)
+    .then((response)=> {
+    console.log(response.data)
+    this.setState({photoData: response.data})
+
+    })
+    .catch((error)=> {
+    });
+  }
+  
+  componentDidMount(){
+    this.photoData();
+
+  }
+  
   render() {
+    console.log(PhotoContext.Provider)
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <PhotoContext.Provider value={this.state.photoData}>
+        <PhotoList />
+      </PhotoContext.Provider>
+      
     );
   }
 }
