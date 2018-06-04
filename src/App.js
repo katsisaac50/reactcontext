@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import logo from './logo.svg';
 import './App.css';
 
 const PhotoContext = React.createContext({gir:"names"})
@@ -9,7 +8,7 @@ let Url="https://jsonplaceholder.typicode.com/photos";
 
 const Photo = ({ photo }) => {
   console.log({photo})
-  return <img src={photo.url} />
+  return (<img src={photo.url} className="images"/>)
 }
 
 const PhotoList = () => {
@@ -19,9 +18,14 @@ const PhotoList = () => {
         photos => {
           if (photos)
           {
-            return photos.map(
+            return <div >
+            <div className = "gallery">
+              {/* {this.props.imageUrls.map(imageUrl => this.renderImage(imageUrl))} */}
+              {photos.map(
               (item) => <Photo photo={item} />
-            )
+              )}
+            </div>
+          </div>   
           }
         } 
 
