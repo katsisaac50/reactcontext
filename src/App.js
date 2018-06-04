@@ -8,8 +8,12 @@ let Url="https://jsonplaceholder.typicode.com/photos";
 
 const Photo = ({ photo }) => {
   console.log({photo})
-  return (<img src={photo.url} className="images"/>)
+  return[ <div className="contain">
+  <img src={photo.url} className="images"/>,
+  <p>{photo.title}</p>
+  </div>]
 }
+
 
 const PhotoList = () => {
   return (
@@ -25,7 +29,7 @@ const PhotoList = () => {
               (item) => <Photo photo={item} />
               )}
             </div>
-          </div>   
+          </div>
           }
         } 
 
@@ -33,6 +37,7 @@ const PhotoList = () => {
     </PhotoContext.Consumer>
   )
 }
+
 
 class App extends Component {
 
