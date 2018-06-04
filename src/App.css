@@ -3,6 +3,14 @@
    border:1px solid #021a40;
    width: 250px;
    margin: 10px;
+   
+}
+.contain{
+  width: 260px;
+  text-align: center;
+  float: left;
+  overflow: hidden;
+  height: 350px;
 }
 
 .gallery {
