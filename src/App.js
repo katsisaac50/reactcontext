@@ -10,7 +10,7 @@ const Photo = ({ photo }) => {
   console.log({photo})
   return[ <div className="contain">
   <img src={photo.url} className="images"/>,
-  <p>{photo.title}</p>
+  {/* <p>{photo.title}</p> */}
   </div>]
 }
 
@@ -22,13 +22,14 @@ const PhotoList = () => {
         photos => {
           if (photos)
           {
-            return <div >
-            <div className = "gallery">
+            return <div className = "gallery">
+          
               {/* {this.props.imageUrls.map(imageUrl => this.renderImage(imageUrl))} */}
               {photos.map(
               (item) => <Photo photo={item} />
               )}
-            </div>
+              <PhotoTitle/>
+             <p>jsjjsj</p>
           </div>
           }
         } 
@@ -38,7 +39,15 @@ const PhotoList = () => {
   )
 }
 
-
+const PhotoTitle=(props)=> {
+ 
+  return (
+    <PhotoContext.Consumer>
+      
+      {title => {<p>{title.title}</p>} }
+    </PhotoContext.Consumer>
+  );
+}
 class App extends Component {
 
   state = {}
@@ -65,6 +74,8 @@ class App extends Component {
     return (
       <PhotoContext.Provider value={this.state.photoData}>
         <PhotoList />
+       
+        
       </PhotoContext.Provider>
       
     );
